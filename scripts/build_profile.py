@@ -166,14 +166,13 @@ def build_stats(user, streak, langs):
     return "\n".join(parts)
 
 
-def pokeball(cx, cy, r, level, idx, n, dur):
-    """A tiny Pokéball built from primitives (no sprites). Contribution cells get a
-    'catch' animation timed to when the trainer ball passes (idx/n of the loop)."""
+def pokeball(cx, cy, r, level, delay, dur):
+    """A tiny Pokéball built from primitives (no sprites). Contribution cells run a
+    'catch' animation (flash + 3 wobbles, then caught/dim) timed to the throw landing."""
     if level == 0:
         return f'<circle cx="{cx}" cy="{cy}" r="{r-0.5}" fill="none" stroke="{SURFACE}" stroke-width="1"/>'
     top = [RED, ORANGE, AMBER, TEXT][level - 1]
     bottom_op = [0.35, 0.55, 0.8, 1.0][level - 1]
-    delay = dur * idx / n
     band = max(1.2, r * 0.3)
     return (
         f'<g class="c" style="animation-delay:{delay:.2f}s" transform="translate({cx} {cy})">'
@@ -187,7 +186,7 @@ def pokeball(cx, cy, r, level, idx, n, dur):
 
 
 def trainer_ball(r):
-    """The big ball that rolls through the grid."""
+    """The ball that gets thrown at the grid."""
     band = r * 0.22
     return (
         f'<g class="spin">'
@@ -201,7 +200,7 @@ def trainer_ball(r):
     )
 
 
-DUR = 26  # seconds per full lap of the trainer ball
+THROW = 0.9  # seconds per throw
 
 
 def build_pokegrid(weeks):
@@ -210,7 +209,9 @@ def build_pokegrid(weeks):
     left, top = 34, 24
     cols = len(weeks)
     W = left + cols * step - gap + 12
-    H = top + 7 * step - gap + 12
+    H = top + 7 * step - gap + 12          # bordered grid box
+    PAD = 52                                # launch area below the box (outside the border)
+    HT = H + PAD
     r = cell / 2
 
     counts = [d["contributionCount"] for w in weeks for d in w["contributionDays"]]
@@ -229,15 +230,10 @@ def build_pokegrid(weeks):
         return 4
 
     parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{HT}" viewBox="0 0 {W} {HT}" '
         f'role="img" aria-label="Contribution calendar for {escape(USER)}">',
         "<!-- Each cell is a tiny Pokéball drawn with primitives -->",
-        "<style>"
-        f"@keyframes catch{{0%{{transform:scale(1);opacity:1}}0.6%{{transform:scale(1.9);opacity:1}}1.6%{{transform:scale(1);opacity:.28}}99.2%{{opacity:.28}}100%{{opacity:1}}}}"
-        f".c{{animation:catch {DUR}s linear infinite;transform-box:fill-box;transform-origin:center}}"
-        "@keyframes spin{to{transform:rotate(360deg)}}"
-        ".spin{animation:spin 1.1s linear infinite;transform-box:fill-box;transform-origin:center}"
-        "</style>",
+        "<!-- style injected below once timing is known -->",
         f'<rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="8" fill="none" stroke="{SURFACE}"/>',
     ]
     # Month labels
@@ -254,31 +250,66 @@ def build_pokegrid(weeks):
     for wd, name in ((1, "Mon"), (3, "Wed"), (5, "Fri")):
         y = top + wd * step + cell / 2 + 3
         parts.append(f'<text x="{left-8}" y="{y:.1f}" text-anchor="end" font-family="{MONO}" font-size="9" fill="{MUTED}">{name}</text>')
-    # Cells, visited in a serpentine order (down col 0, up col 1, ...) by the trainer ball
-    order = []  # (cx, cy) in visit order
-    cells = {}
+    # Contribution cells in chronological order; each gets one throw
+    targets = []
     for ci, w in enumerate(weeks):
         for d in w["contributionDays"]:
             wd = (dt.date.fromisoformat(d["date"]).weekday() + 1) % 7  # Sunday = 0
-            cells[(ci, wd)] = d["contributionCount"]
-    for ci in range(cols):
-        rows = range(7) if ci % 2 == 0 else range(6, -1, -1)
-        for wd in rows:
-            order.append((ci, wd))
-    n = len(order)
-    for idx, (ci, wd) in enumerate(order):
-        if (ci, wd) not in cells:
-            continue
-        cx = left + ci * step + r
-        cy = top + wd * step + r
-        parts.append(pokeball(cx, cy, r, level(cells[(ci, wd)]), idx, n, DUR))
-    # Trainer ball path as a CSS keyframe list (no SMIL: it leaves a static ghost at the origin in some renderers)
-    pts = [(left + ci*step + r, top + wd*step + r) for ci, wd in order]
-    pts.append(pts[0])
-    frames = "".join(f"{100*i/(len(pts)-1):.3f}%{{transform:translate({x:.1f}px,{y:.1f}px)}}" for i, (x, y) in enumerate(pts))
-    parts.append(f"<style>@keyframes roll{{{frames}}}.roll{{animation:roll {DUR}s linear infinite}}</style>")
-    x0, y0 = pts[0]
-    parts.append(f'<g class="roll" transform="translate({x0:.1f} {y0:.1f})">{trainer_ball(r + 2.5)}</g>')
+            lv = level(d["contributionCount"])
+            cx = left + ci * step + r
+            cy = top + wd * step + r
+            if lv == 0:
+                parts.append(pokeball(cx, cy, r, 0, 0, 0))
+            else:
+                targets.append((cx, cy, lv))
+    n = max(1, len(targets))
+    DUR = n * THROW + 1.0
+    land_frac = 0.78
+    for i, (cx, cy, lv) in enumerate(targets):
+        parts.append(pokeball(cx, cy, r, lv, i * THROW + land_frac * THROW, DUR))
+
+    # Throw keyframes: start big at the launch pad (outside the box, bottom-right), arc up and
+    # shrink toward the target (fake depth), vanish on impact, reappear at the pad for the next throw.
+    sx, sy = W - 36, HT - 22
+    kf = []
+    def key(t, x, y, sc, op):
+        kf.append(f"{100*t/DUR:.3f}%{{transform:translate({x:.1f}px,{y:.1f}px) scale({sc:.2f});opacity:{op}}}")
+    for i, (cx, cy, lv) in enumerate(targets):
+        t0 = i * THROW
+        mx, my = (sx + cx) / 2, min(sy, cy) - 60
+        key(t0, sx, sy, 2.3, 1)
+        key(t0 + 0.42 * THROW, mx, my, 1.6, 1)
+        key(t0 + land_frac * THROW, cx, cy, 0.95, 1)
+        key(t0 + (land_frac + 0.04) * THROW, cx, cy, 0.6, 0)
+        key(t0 + THROW - 0.02, sx, sy, 2.3, 0)
+    key(DUR, sx, sy, 2.3, 1)
+    lp = 100 * land_frac * THROW / DUR  # unused; catch keyframes are relative to each cell's own delay
+    c = lambda sec: f"{100*sec/DUR:.3f}%"
+    catch = (
+        f"0%{{transform:scale(1);opacity:1}}"
+        f"{c(0.06)}{{transform:scale(1.8) rotate(0deg);opacity:1}}"
+        f"{c(0.14)}{{transform:scale(1.15) rotate(-22deg)}}"
+        f"{c(0.24)}{{transform:scale(1.15) rotate(22deg)}}"
+        f"{c(0.34)}{{transform:scale(1.15) rotate(-16deg)}}"
+        f"{c(0.44)}{{transform:scale(1.1) rotate(10deg)}}"
+        f"{c(0.54)}{{transform:scale(1) rotate(0deg);opacity:1}}"
+        f"{c(0.64)}{{transform:scale(1);opacity:.3}}"
+        f"{c(DUR-0.5)}{{opacity:.3}}"
+        f"100%{{transform:scale(1);opacity:1}}"
+    )
+    parts.append(
+        "<style>"
+        f"@keyframes catch{{{catch}}}"
+        f".c{{animation:catch {DUR:.2f}s linear infinite;transform-box:fill-box;transform-origin:center}}"
+        "@keyframes spin{to{transform:rotate(360deg)}}"
+        ".spin{animation:spin .6s linear infinite;transform-box:fill-box;transform-origin:center}"
+        f"@keyframes throw{{{''.join(kf)}}}"
+        f".throw{{animation:throw {DUR:.2f}s linear infinite}}"
+        "</style>"
+    )
+    # launch pad marker + ball
+    parts.append(f'<ellipse cx="{sx}" cy="{sy+16}" rx="18" ry="4" fill="{SURFACE}"/>')
+    parts.append(f'<g class="throw" transform="translate({sx} {sy}) scale(2.3)">{trainer_ball(r)}</g>')
     parts.append("</svg>")
     return "\n".join(parts)
 
