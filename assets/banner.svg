@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 500" width="1500" height="500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Vinh Le — Backend engineer · Georgia Tech OMSCS · Atlanta">
-  <title>Vinh Le — Backend engineer · Georgia Tech OMSCS · Atlanta</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 500" width="1500" height="500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Vinh Le — Full-stack &amp; AI engineer · Georgia Tech OMSCS · Atlanta">
+  <title>Vinh Le — Full-stack &amp; AI engineer · Georgia Tech OMSCS · Atlanta</title>
   <defs>
     <style>
       @keyframes breathe { 0%,100% { opacity: .55; transform: scale(1); } 50% { opacity: .85; transform: scale(1.08); } }
@@ -69,6 +69,6 @@
 
   <rect class="rule" x="120" y="278" width="560" height="2" fill="url(#rule)"/>
 
-  <text class="sub" x="120" y="335" fill="#F5F5F5">Backend engineer. Ships APIs, pipelines, and the tests that guard them.</text>
+  <text class="sub" x="120" y="335" fill="#F5F5F5">Full-stack &amp; AI engineer. Ships products end to end, from model to UI.</text>
   <text class="meta" x="120" y="390" fill="#FFB347">M.S. CS @ GEORGIA TECH  ·  ATLANTA, GA  ·  github.com/vinhbin</text>
 </svg>
