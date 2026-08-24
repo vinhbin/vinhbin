@@ -39,7 +39,7 @@ query($login: String!, $from: DateTime!, $to: DateTime!) {
         weeks { contributionDays { date contributionCount } }
       }
     }
-    repositories(first: 100, ownerAffiliations: OWNER, isFork: false) {
+    repositories(first: 10, ownerAffiliations: OWNER, isFork: false, orderBy: {field: PUSHED_AT, direction: DESC}) {
       nodes {
         name
         languages(first: 5, orderBy: {field: SIZE, direction: DESC}) {
@@ -95,6 +95,8 @@ def compute_streak(days):
 def compute_languages(repos):
     totals = {}
     for repo in repos:
+        if repo["name"].lower() == USER.lower():  # skip the profile README repo itself
+            continue
         for edge in repo["languages"]["edges"]:
             name = edge["node"]["name"]
             totals[name] = totals.get(name, 0) + edge["size"]
@@ -164,17 +166,17 @@ def build_stats(user, streak, langs):
     return "\n".join(parts)
 
 
-def pokeball(cx, cy, r, level, col):
-    """A tiny Pokéball built from primitives (no sprites)."""
+def pokeball(cx, cy, r, level, idx, n, dur):
+    """A tiny Pokéball built from primitives (no sprites). Contribution cells get a
+    'catch' animation timed to when the trainer ball passes (idx/n of the loop)."""
     if level == 0:
         return f'<circle cx="{cx}" cy="{cy}" r="{r-0.5}" fill="none" stroke="{SURFACE}" stroke-width="1"/>'
     top = [RED, ORANGE, AMBER, TEXT][level - 1]
     bottom_op = [0.35, 0.55, 0.8, 1.0][level - 1]
-    cls = ' class="w"' if level >= 3 else ""
-    style = f' style="animation-delay:{(col * 0.09) % 2.4:.2f}s"' if level >= 3 else ""
+    delay = dur * idx / n
     band = max(1.2, r * 0.3)
     return (
-        f'<g{cls}{style} transform="translate({cx} {cy})">'
+        f'<g class="c" style="animation-delay:{delay:.2f}s" transform="translate({cx} {cy})">'
         f'<path d="M{-r} 0 A{r} {r} 0 0 1 {r} 0 Z" fill="{top}"/>'
         f'<path d="M{-r} 0 A{r} {r} 0 0 0 {r} 0 Z" fill="{TEXT}" fill-opacity="{bottom_op}"/>'
         f'<rect x="{-r}" y="{-band/2:.2f}" width="{2*r}" height="{band:.2f}" fill="{BG}"/>'
@@ -182,6 +184,24 @@ def pokeball(cx, cy, r, level, col):
         f'<circle r="{r*0.2:.2f}" fill="{top}"/>'
         f'</g>'
     )
+
+
+def trainer_ball(r):
+    """The big ball that rolls through the grid."""
+    band = r * 0.22
+    return (
+        f'<g class="spin">'
+        f'<circle r="{r+1.5}" fill="{BG}"/>'
+        f'<path d="M{-r} 0 A{r} {r} 0 0 1 {r} 0 Z" fill="{RED}"/>'
+        f'<path d="M{-r} 0 A{r} {r} 0 0 0 {r} 0 Z" fill="{TEXT}"/>'
+        f'<rect x="{-r}" y="{-band/2:.2f}" width="{2*r}" height="{band:.2f}" fill="{BG}"/>'
+        f'<circle r="{r*0.38:.2f}" fill="{BG}"/>'
+        f'<circle r="{r*0.24:.2f}" fill="{TEXT}"/>'
+        f'</g>'
+    )
+
+
+DUR = 26  # seconds per full lap of the trainer ball
 
 
 def build_pokegrid(weeks):
@@ -213,8 +233,10 @@ def build_pokegrid(weeks):
         f'role="img" aria-label="Contribution calendar for {escape(USER)}">',
         "<!-- Each cell is a tiny Pokéball drawn with primitives -->",
         "<style>"
-        "@keyframes wobble{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}"
-        ".w{animation:wobble 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}"
+        f"@keyframes catch{{0%{{transform:scale(1);opacity:1}}0.6%{{transform:scale(1.9);opacity:1}}1.6%{{transform:scale(1);opacity:.28}}99.2%{{opacity:.28}}100%{{opacity:1}}}}"
+        f".c{{animation:catch {DUR}s linear infinite;transform-box:fill-box;transform-origin:center}}"
+        "@keyframes spin{to{transform:rotate(360deg)}}"
+        ".spin{animation:spin 1.1s linear infinite;transform-box:fill-box;transform-origin:center}"
         "</style>",
         f'<rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="8" fill="none" stroke="{SURFACE}"/>',
     ]
@@ -232,13 +254,31 @@ def build_pokegrid(weeks):
     for wd, name in ((1, "Mon"), (3, "Wed"), (5, "Fri")):
         y = top + wd * step + cell / 2 + 3
         parts.append(f'<text x="{left-8}" y="{y:.1f}" text-anchor="end" font-family="{MONO}" font-size="9" fill="{MUTED}">{name}</text>')
-    # Cells
+    # Cells, visited in a serpentine order (down col 0, up col 1, ...) by the trainer ball
+    order = []  # (cx, cy) in visit order
+    cells = {}
     for ci, w in enumerate(weeks):
         for d in w["contributionDays"]:
             wd = (dt.date.fromisoformat(d["date"]).weekday() + 1) % 7  # Sunday = 0
-            cx = left + ci * step + r
-            cy = top + wd * step + r
-            parts.append(pokeball(cx, cy, r, level(d["contributionCount"]), ci))
+            cells[(ci, wd)] = d["contributionCount"]
+    for ci in range(cols):
+        rows = range(7) if ci % 2 == 0 else range(6, -1, -1)
+        for wd in rows:
+            order.append((ci, wd))
+    n = len(order)
+    for idx, (ci, wd) in enumerate(order):
+        if (ci, wd) not in cells:
+            continue
+        cx = left + ci * step + r
+        cy = top + wd * step + r
+        parts.append(pokeball(cx, cy, r, level(cells[(ci, wd)]), idx, n, DUR))
+    # Trainer ball path as a CSS keyframe list (no SMIL: it leaves a static ghost at the origin in some renderers)
+    pts = [(left + ci*step + r, top + wd*step + r) for ci, wd in order]
+    pts.append(pts[0])
+    frames = "".join(f"{100*i/(len(pts)-1):.3f}%{{transform:translate({x:.1f}px,{y:.1f}px)}}" for i, (x, y) in enumerate(pts))
+    parts.append(f"<style>@keyframes roll{{{frames}}}.roll{{animation:roll {DUR}s linear infinite}}</style>")
+    x0, y0 = pts[0]
+    parts.append(f'<g class="roll" transform="translate({x0:.1f} {y0:.1f})">{trainer_ball(r + 2.5)}</g>')
     parts.append("</svg>")
     return "\n".join(parts)
 
