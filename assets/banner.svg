@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 500" width="1500" height="500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Vinh Le — Backend engineer · Georgia Tech OMSCS · Atlanta">
+  <title>Vinh Le — Backend engineer · Georgia Tech OMSCS · Atlanta</title>
+  <defs>
+    <style>
+      @keyframes breathe { 0%,100% { opacity: .55; transform: scale(1); } 50% { opacity: .85; transform: scale(1.08); } }
+      @keyframes rise { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: .9; } 90% { opacity: .4; } 100% { transform: translateY(-560px); opacity: 0; } }
+      @keyframes wipe { 0% { transform: translateX(-1500px); } 100% { transform: translateX(0); } }
+      @keyframes fadeUp { 0% { opacity: 0; transform: translateY(14px); } 100% { opacity: 1; transform: translateY(0); } }
+      @keyframes lineGrow { 0% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
+      .glow { transform-origin: 1180px 420px; animation: breathe 7s ease-in-out infinite; }
+      .ember { animation: rise linear infinite; }
+      .e1 { animation-duration: 14s; animation-delay: -2s; }
+      .e2 { animation-duration: 18s; animation-delay: -9s; }
+      .e3 { animation-duration: 16s; animation-delay: -5s; }
+      .e4 { animation-duration: 20s; animation-delay: -13s; }
+      .e5 { animation-duration: 15s; animation-delay: -7s; }
+      .e6 { animation-duration: 19s; animation-delay: -1s; }
+      .e7 { animation-duration: 17s; animation-delay: -11s; }
+      .e8 { animation-duration: 21s; animation-delay: -4s; }
+      .e9 { animation-duration: 13s; animation-delay: -8s; }
+      .e10 { animation-duration: 22s; animation-delay: -15s; }
+      .sweep { animation: wipe 1.6s cubic-bezier(.65,0,.35,1) forwards; }
+      .sub { opacity: 0; animation: fadeUp 1s ease-out .9s forwards; }
+      .meta { opacity: 0; animation: fadeUp 1s ease-out 1.3s forwards; }
+      .rule { transform-origin: 120px 0; animation: lineGrow 1.2s cubic-bezier(.65,0,.35,1) .5s both; }
+      .name { font-family: Georgia, "Times New Roman", "Iowan Old Style", serif; font-size: 118px; letter-spacing: -2px; }
+      .sub  { font-family: Georgia, "Times New Roman", serif; font-size: 30px; font-style: italic; }
+      .meta { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 17px; letter-spacing: 3px; }
+    </style>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF6B35" stop-opacity=".55"/>
+      <stop offset="45%" stop-color="#E63946" stop-opacity=".18"/>
+      <stop offset="100%" stop-color="#0D0D0F" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="text" x1="0" x2="1">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="60%" stop-color="#FFB347"/>
+      <stop offset="100%" stop-color="#F5F5F5"/>
+    </linearGradient>
+    <linearGradient id="rule" x1="0" x2="1">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#FF6B35" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="nameClip"><text class="name" x="120" y="250">Vinh Le</text></clipPath>
+  </defs>
+
+  <rect width="1500" height="500" fill="#0D0D0F"/>
+  <circle class="glow" cx="1180" cy="420" r="420" fill="url(#glow)"/>
+
+  <!-- embers -->
+  <g fill="#FFB347">
+    <circle class="ember e1"  cx="1040" cy="520" r="2.2"/>
+    <circle class="ember e2"  cx="1120" cy="520" r="1.6"/>
+    <circle class="ember e3"  cx="1210" cy="520" r="2.6" fill="#FF6B35"/>
+    <circle class="ember e4"  cx="1290" cy="520" r="1.4"/>
+    <circle class="ember e5"  cx="1350" cy="520" r="2.0" fill="#E63946"/>
+    <circle class="ember e6"  cx="1420" cy="520" r="1.8"/>
+    <circle class="ember e7"  cx="1160" cy="520" r="1.2" fill="#FF6B35"/>
+    <circle class="ember e8"  cx="1250" cy="520" r="2.4"/>
+    <circle class="ember e9"  cx="1380" cy="520" r="1.5" fill="#FF6B35"/>
+    <circle class="ember e10" cx="1470" cy="520" r="1.9"/>
+  </g>
+
+  <!-- name: dim base, then gradient sweeps in -->
+  <text class="name" x="120" y="250" fill="#2A2A2E">Vinh Le</text>
+  <g clip-path="url(#nameClip)">
+    <rect class="sweep" x="0" y="120" width="1500" height="160" fill="url(#text)"/>
+  </g>
+
+  <rect class="rule" x="120" y="278" width="560" height="2" fill="url(#rule)"/>
+
+  <text class="sub" x="120" y="335" fill="#F5F5F5">Backend engineer. Ships APIs, pipelines, and the tests that guard them.</text>
+  <text class="meta" x="120" y="390" fill="#FFB347">M.S. CS @ GEORGIA TECH  ·  ATLANTA, GA  ·  github.com/vinhbin</text>
+</svg>
