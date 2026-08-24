@@ -4,7 +4,7 @@
     <style>
       @keyframes breathe { 0%,100% { opacity: .55; transform: scale(1); } 50% { opacity: .85; transform: scale(1.08); } }
       @keyframes rise { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: .9; } 90% { opacity: .4; } 100% { transform: translateY(-560px); opacity: 0; } }
-      @keyframes wipe { 0% { transform: translateX(-1500px); } 100% { transform: translateX(0); } }
+      @keyframes wipe { 0% { transform: translateX(-620px); } 100% { transform: translateX(0); } }
       @keyframes fadeUp { 0% { opacity: 0; transform: translateY(14px); } 100% { opacity: 1; transform: translateY(0); } }
       @keyframes lineGrow { 0% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
       .glow { transform-origin: 1180px 420px; animation: breathe 7s ease-in-out infinite; }
@@ -19,9 +19,9 @@
       .e8 { animation-duration: 21s; animation-delay: -4s; }
       .e9 { animation-duration: 13s; animation-delay: -8s; }
       .e10 { animation-duration: 22s; animation-delay: -15s; }
-      .sweep { animation: wipe 1.6s cubic-bezier(.65,0,.35,1) forwards; }
-      .sub { opacity: 0; animation: fadeUp 1s ease-out .9s forwards; }
-      .meta { opacity: 0; animation: fadeUp 1s ease-out 1.3s forwards; }
+      .sweep { animation: wipe 1.6s cubic-bezier(.65,0,.35,1) both; }
+      .sub { animation: fadeUp 1s ease-out .9s both; }
+      .meta { animation: fadeUp 1s ease-out 1.3s both; }
       .rule { transform-origin: 120px 0; animation: lineGrow 1.2s cubic-bezier(.65,0,.35,1) .5s both; }
       .name { font-family: Georgia, "Times New Roman", "Iowan Old Style", serif; font-size: 118px; letter-spacing: -2px; }
       .sub  { font-family: Georgia, "Times New Roman", serif; font-size: 30px; font-style: italic; }
@@ -64,7 +64,7 @@
   <!-- name: dim base, then gradient sweeps in -->
   <text class="name" x="120" y="250" fill="#2A2A2E">Vinh Le</text>
   <g clip-path="url(#nameClip)">
-    <rect class="sweep" x="0" y="120" width="1500" height="160" fill="url(#text)"/>
+    <rect class="sweep" x="110" y="120" width="620" height="160" fill="url(#text)"/>
   </g>
 
   <rect class="rule" x="120" y="278" width="560" height="2" fill="url(#rule)"/>
