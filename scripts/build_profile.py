@@ -166,22 +166,65 @@ def build_stats(user, streak, langs):
     return "\n".join(parts)
 
 
-def pokeball(cx, cy, r, level, delay, dur):
-    """A tiny Pokéball built from primitives (no sprites). Contribution cells run a
-    'catch' animation (flash + 3 wobbles, then caught/dim) timed to the throw landing."""
-    if level == 0:
-        return f'<circle cx="{cx}" cy="{cy}" r="{r-0.5}" fill="none" stroke="{SURFACE}" stroke-width="1"/>'
-    top = [RED, ORANGE, AMBER, TEXT][level - 1]
-    bottom_op = [0.35, 0.55, 0.8, 1.0][level - 1]
+def ball_shape(r, top, bottom_op=1.0):
     band = max(1.2, r * 0.3)
     return (
-        f'<g class="c" style="animation-delay:{delay:.2f}s" transform="translate({cx} {cy})">'
         f'<path d="M{-r} 0 A{r} {r} 0 0 1 {r} 0 Z" fill="{top}"/>'
         f'<path d="M{-r} 0 A{r} {r} 0 0 0 {r} 0 Z" fill="{TEXT}" fill-opacity="{bottom_op}"/>'
         f'<rect x="{-r}" y="{-band/2:.2f}" width="{2*r}" height="{band:.2f}" fill="{BG}"/>'
         f'<circle r="{r*0.36:.2f}" fill="{BG}"/>'
         f'<circle r="{r*0.2:.2f}" fill="{top}"/>'
-        f'</g>'
+    )
+
+
+def creature(r, level):
+    """Original tiny monsters drawn from primitives (no third-party sprites).
+    Level 1 blob · 2 bird · 3 flame · 4 ghost, colored by intensity."""
+    col = [RED, ORANGE, AMBER, TEXT][level - 1]
+    eye = BG
+    k = r / 6.0  # scale unit (r=7 → k≈1.17)
+    if level == 1:  # round blob with ears
+        return (
+            f'<path d="M{-4.2*k} {-2.5*k} L{-3*k} {-6*k} L{-1.2*k} {-3.6*k} Z" fill="{col}"/>'
+            f'<path d="M{4.2*k} {-2.5*k} L{3*k} {-6*k} L{1.2*k} {-3.6*k} Z" fill="{col}"/>'
+            f'<circle r="{4.6*k:.2f}" cy="{0.6*k:.2f}" fill="{col}"/>'
+            f'<circle cx="{-1.7*k:.2f}" cy="{-0.2*k:.2f}" r="{0.9*k:.2f}" fill="{eye}"/>'
+            f'<circle cx="{1.7*k:.2f}" cy="{-0.2*k:.2f}" r="{0.9*k:.2f}" fill="{eye}"/>'
+        )
+    if level == 2:  # bird: body, beak, wing
+        return (
+            f'<ellipse rx="{4.4*k:.2f}" ry="{3.8*k:.2f}" cy="{0.8*k:.2f}" fill="{col}"/>'
+            f'<circle r="{2.8*k:.2f}" cx="{1.2*k:.2f}" cy="{-2.6*k:.2f}" fill="{col}"/>'
+            f'<path d="M{3.6*k} {-2.8*k} L{6.2*k} {-2*k} L{3.6*k} {-1.4*k} Z" fill="{BG}"/>'
+            f'<circle cx="{1.6*k:.2f}" cy="{-3.2*k:.2f}" r="{0.8*k:.2f}" fill="{eye}"/>'
+            f'<path d="M{-4.2*k} {0.6*k} Q{-2*k} {-1.6*k} {0.4*k} {0.8*k} Z" fill="{BG}" fill-opacity=".45"/>'
+        )
+    if level == 3:  # flame: teardrop with a tip
+        return (
+            f'<path d="M0 {-6.4*k} Q{4.8*k} {-1.6*k} {3.2*k} {3.4*k} A{3.4*k} {3.4*k} 0 0 1 {-3.2*k} {3.4*k} Q{-4.8*k} {-1.6*k} 0 {-6.4*k} Z" fill="{col}"/>'
+            f'<path d="M{0.4*k} {-2.4*k} Q{2.4*k} {0.2*k} {1.2*k} {2.8*k} A{1.6*k} {1.6*k} 0 0 1 {-1.4*k} {2.6*k} Q{-1.6*k} {0.4*k} {0.4*k} {-2.4*k} Z" fill="{BG}" fill-opacity=".35"/>'
+            f'<circle cx="{-1.5*k:.2f}" cy="{0.6*k:.2f}" r="{0.85*k:.2f}" fill="{eye}"/>'
+            f'<circle cx="{1.5*k:.2f}" cy="{0.6*k:.2f}" r="{0.85*k:.2f}" fill="{eye}"/>'
+        )
+    # level 4 ghost: dome top, wavy skirt
+    return (
+        f'<path d="M{-4.6*k} {4.2*k} L{-4.6*k} {-0.6*k} A{4.6*k} {4.6*k} 0 0 1 {4.6*k} {-0.6*k} L{4.6*k} {4.2*k} '
+        f'L{3*k} {2.6*k} L{1.5*k} {4.2*k} L0 {2.6*k} L{-1.5*k} {4.2*k} L{-3*k} {2.6*k} Z" fill="{col}"/>'
+        f'<circle cx="{-1.7*k:.2f}" cy="{-0.6*k:.2f}" r="{1*k:.2f}" fill="{eye}"/>'
+        f'<circle cx="{1.7*k:.2f}" cy="{-0.6*k:.2f}" r="{1*k:.2f}" fill="{eye}"/>'
+    )
+
+
+def pokeball(cx, cy, r, level, delay, dur):
+    """Grid cell. Level 0 = dim empty slot. Contribution cells show a creature that gets
+    hit by the thrown ball, vanishes, and is replaced by a wobbling Pokéball (caught)."""
+    if level == 0:
+        return f'<circle cx="{cx}" cy="{cy}" r="{r-0.5}" fill="none" stroke="{SURFACE}" stroke-width="1"/>'
+    top = [RED, ORANGE, AMBER, TEXT][level - 1]
+    d = f'style="animation-delay:{delay:.2f}s"'
+    return (
+        f'<g class="mon" {d} transform="translate({cx} {cy})">{creature(r, level)}</g>'
+        f'<g class="cb" {d} transform="translate({cx} {cy})">{ball_shape(r, top)}</g>'
     )
 
 
@@ -204,7 +247,7 @@ THROW = 0.9  # seconds per throw
 
 
 def build_pokegrid(weeks):
-    cell, gap = 12, 3
+    cell, gap = 14, 3
     step = cell + gap
     left, top = 34, 24
     cols = len(weeks)
@@ -283,24 +326,30 @@ def build_pokegrid(weeks):
         key(t0 + (land_frac + 0.04) * THROW, cx, cy, 0.6, 0)
         key(t0 + THROW - 0.02, sx, sy, 2.3, 0)
     key(DUR, sx, sy, 2.3, 1)
-    lp = 100 * land_frac * THROW / DUR  # unused; catch keyframes are relative to each cell's own delay
     c = lambda sec: f"{100*sec/DUR:.3f}%"
-    catch = (
+    mon = (
         f"0%{{transform:scale(1);opacity:1}}"
-        f"{c(0.06)}{{transform:scale(1.8) rotate(0deg);opacity:1}}"
-        f"{c(0.14)}{{transform:scale(1.15) rotate(-22deg)}}"
-        f"{c(0.24)}{{transform:scale(1.15) rotate(22deg)}}"
-        f"{c(0.34)}{{transform:scale(1.15) rotate(-16deg)}}"
-        f"{c(0.44)}{{transform:scale(1.1) rotate(10deg)}}"
-        f"{c(0.54)}{{transform:scale(1) rotate(0deg);opacity:1}}"
-        f"{c(0.64)}{{transform:scale(1);opacity:.3}}"
-        f"{c(DUR-0.5)}{{opacity:.3}}"
+        f"{c(0.05)}{{transform:scale(1.5);opacity:1}}"
+        f"{c(0.16)}{{transform:scale(.15);opacity:0}}"
+        f"{c(DUR-0.5)}{{transform:scale(.15);opacity:0}}"
         f"100%{{transform:scale(1);opacity:1}}"
+    )
+    cb = (
+        f"0%{{transform:scale(.3) rotate(0deg);opacity:0}}"
+        f"{c(0.14)}{{transform:scale(.3) rotate(0deg);opacity:0}}"
+        f"{c(0.20)}{{transform:scale(1.4) rotate(0deg);opacity:1}}"
+        f"{c(0.30)}{{transform:scale(1.1) rotate(-24deg)}}"
+        f"{c(0.40)}{{transform:scale(1.1) rotate(24deg)}}"
+        f"{c(0.50)}{{transform:scale(1.05) rotate(-14deg)}}"
+        f"{c(0.60)}{{transform:scale(1) rotate(0deg);opacity:1}}"
+        f"{c(DUR-0.5)}{{transform:scale(1) rotate(0deg);opacity:1}}"
+        f"100%{{transform:scale(.3) rotate(0deg);opacity:0}}"
     )
     parts.append(
         "<style>"
-        f"@keyframes catch{{{catch}}}"
-        f".c{{animation:catch {DUR:.2f}s linear infinite;transform-box:fill-box;transform-origin:center}}"
+        f"@keyframes mon{{{mon}}}@keyframes cb{{{cb}}}"
+        f".mon{{animation:mon {DUR:.2f}s linear infinite;transform-box:fill-box;transform-origin:center}}"
+        f".cb{{animation:cb {DUR:.2f}s linear infinite;transform-box:fill-box;transform-origin:center;opacity:0}}"
         "@keyframes spin{to{transform:rotate(360deg)}}"
         ".spin{animation:spin .6s linear infinite;transform-box:fill-box;transform-origin:center}"
         f"@keyframes throw{{{''.join(kf)}}}"
