@@ -1,22 +1,21 @@
 <!-- ╔══════════════════════════════════════════════════════════════════╗ -->
 <!-- ║                         VINH LE · README                         ║ -->
-<!-- ║         Full-stack & AI SWE · Georgia Tech OMSCS · Hackathon Builder ║ -->
+<!-- ║    Full-stack & AI SWE · Georgia Tech OMSCS · Hackathon Builder  ║ -->
 <!-- ╚══════════════════════════════════════════════════════════════════╝ -->
-<!-- Palette (Ember): bg 0D0D0F · orange FF6B35 · amber FFB347 · red E63946 · text F5F5F5 -->
+<!-- Palette (Ember): bg 0D0D0F · surface 1A1A1F · orange FF6B35 · amber FFB347 · red E63946 · text F5F5F5 -->
+<!-- Generated assets (stats.svg, pokegrid.svg) come from .github/workflows/profile.yml → output branch -->
 
 <!-- ─────────────────────────  HERO BANNER  ───────────────────────── -->
 <a href="https://github.com/vinhbin">
   <img src="./assets/banner.svg" alt="Vinh Le · Full-stack &amp; AI engineer · Georgia Tech OMSCS · Atlanta" width="100%" />
 </a>
 
-<!-- ─────────────────────  ANIMATED TYPING TAGLINE  ───────────────── -->
 <div align="center">
   <a href="https://vinh-le.com">
-    <img src="https://readme-typing-svg.demolab.com?font=Georgia&weight=400&size=28&duration=3000&pause=800&color=FFB347&center=true&vCenter=true&width=820&height=60&lines=Full-stack+%26+AI+Engineer;Always+building+%C2%B7+Solving+impactful+problems+with+AI;M.S.+Computer+Science+%40+Georgia+Tech;1st+Place+%C2%B7+Actian+VectorAI+DB+Build+Challenge;Best+Hack+for+Good+%C2%B7+Hack+RenderATL+%2F+MLH;Ex-SWE+Intern+%26+Co-Lead+%40+SkyIT;Atlanta%2C+GA+%C2%B7+Building+end-to-end" alt="Rotating tagline" />
+    <img src="https://readme-typing-svg.demolab.com?font=Georgia&weight=400&size=28&duration=3000&pause=800&color=FFB347&center=true&vCenter=true&width=820&height=60&lines=Full-stack+%26+AI+Engineer;Always+building+%C2%B7+Solving+impactful+problems+with+AI;M.S.+Computer+Science+%40+Georgia+Tech;1st+Place+%C2%B7+Actian+VectorAI+DB+Build+Challenge;Best+Hack+for+Good+%C2%B7+Hack+RenderATL+%2F+MLH;Ex-SWE+Intern+%26+Co-Lead+%40+SkyIT;Atlanta%2C+GA" alt="Rotating tagline" />
   </a>
 </div>
 
-<!-- ─────────────────────────  STATUS BADGES  ─────────────────────── -->
 <div align="center">
   <img src="https://komarev.com/ghpvc/?username=vinhbin&label=PROFILE+VIEWS&color=FF6B35&style=for-the-badge" alt="Profile views" />
   <img src="https://img.shields.io/github/followers/vinhbin?label=FOLLOWERS&style=for-the-badge&color=FFB347&labelColor=0D0D0F" alt="GitHub followers" />
@@ -25,86 +24,98 @@
 
 <br/>
 
-<img src="./assets/divider.svg" width="100%" alt="" />
+<!-- ───────────────────────────  01 ABOUT  ─────────────────────────── -->
+<img src="./assets/headers/about.svg" width="100%" alt="About" />
 
-<!-- ───────────────────────────  ABOUT  ────────────────────────────── -->
-<div id="user-content-toc">
-  <ul align="center" style="list-style: none;">
-    <summary><h2 style="display: inline-block;">About Me</h2></summary>
-  </ul>
-</div>
+I'm Vinh, a full-stack and AI engineer in Atlanta. I'm happiest when I'm building, and the projects I care about most all started the same way: a real problem — a family searching for someone, a neighborhood that goes dark, a racer who needs a coach in their ear — and the question of what AI could actually do about it. I finished my B.S. in CS at Georgia State (Dean's List) and started the M.S. at Georgia Tech in August 2026. Before that I co-led a team at SkyIT modernizing a multi-tenant Django/React platform, and spent the summer as a CodePath Technical Fellow for a 200+ learner AI engineering course.
 
-```yaml
-name:        Vinh Le
-role:        Full-stack & AI Engineer
-mission:     Always building · using AI to solve problems that actually matter
-education:   Georgia Tech · M.S. Computer Science (OMSCS) · '28
-             Georgia State · B.S. Computer Science · 3.5 GPA · Dean's List · Dec '25
-experience:  SWE Intern → Co-Lead @ SkyIT (GBCS Group) · Technical Fellow @ CodePath
-record:      2 hackathon wins · 6 shipped hackathon builds
-building:    AI products end to end: models, APIs, pipelines, UI, and tests
-learning:    Agentic systems · Vector search · Local & on-device models
-location:    Atlanta, GA  (UTC-5)
-contact:     vinhhle24@gmail.com  ·  vinh-le.com
-```
-
-- **Latest** &nbsp;**Best Hack for Good** at **Hack RenderATL / MLH** with **WATTLINE**, led a 4-person team mapping outage exposure for electricity-dependent medical users across 25 Atlanta NPUs
-- **Also** &nbsp;**1st place** at the **Actian VectorAI DB Build Challenge** with **Trace**, a multi-vector forensic search platform · shipped **Bearing Witness** at the **Dell × NVIDIA AI Hackathon** in NYC
-- **Previously** &nbsp;co-led modernization of a multi-tenant Django/React fleet platform at **SkyIT**, fixing defects across 14+ endpoints and porting the GHG emissions module to tenant-scoped models
-- **Summer 2026** &nbsp;**CodePath Technical Fellow** for a 200+ learner AI engineering course · Certificate of Leadership
-- **What drives me** &nbsp;I'm happiest building. Every project above started with a real problem — a family searching for someone, a neighborhood that goes dark, a racer who needs a coach in their ear — and asked what AI could actually do about it.
-- **Ask me about** &nbsp;AI engineering · RAG & vector search · FastAPI / Django / React · hackathons · the Atlanta tech scene
+<table align="center" width="100%">
+  <tr>
+    <td valign="top" width="50%">
+      <b>Now</b><br/>
+      <sub>
+      · M.S. CS @ Georgia Tech (OMSCS)<br/>
+      · Shipping <a href="https://github.com/vinhbin/wattline">WATTLINE</a> past the hackathon build<br/>
+      · Local, on-device agents (<a href="https://github.com/StephenSook/bearing-witness">Bearing Witness</a>)
+      </sub>
+    </td>
+    <td valign="top" width="50%">
+      <b>Next</b><br/>
+      <sub>
+      · Agentic systems with a human in the loop<br/>
+      · Multi-vector retrieval beyond forensics<br/>
+      · Founding something in AI for high-stakes domains
+      </sub>
+    </td>
+  </tr>
+</table>
 
 <br/>
 
-<img src="./assets/divider.svg" width="100%" alt="" />
-
-<!-- ─────────────────────────  FEATURED BUILDS  ─────────────────────── -->
-<div id="user-content-toc">
-  <ul align="center" style="list-style: none;">
-    <summary><h2 style="display: inline-block;">Featured Builds</h2></summary>
-  </ul>
-</div>
+<!-- ─────────────────────────  02 FEATURED BUILDS  ─────────────────── -->
+<img src="./assets/headers/builds.svg" width="100%" alt="Featured Builds" />
 
 <p align="center">
   <sub><b>Hackathon record</b> &nbsp;·&nbsp; 🥇 1st @ Actian VectorAI DB Build Challenge &nbsp;·&nbsp; 🏆 Best Hack for Good @ Hack RenderATL / MLH &nbsp;·&nbsp; ⚙️ Dell × NVIDIA AI Hackathon NYC &nbsp;·&nbsp; 🏎️ IBM SkillsBuild AI Builders &nbsp;·&nbsp; 🗺️ Team USA × Google Cloud &nbsp;·&nbsp; 🛡️ Reddit Mod Tools</sub>
 </p>
 
-<table align="center">
-  <tr>
-    <td valign="top" width="50%">
-      🥇 <a href="https://github.com/StephenSook/trace-forensic-search"><b>Trace</b></a> &nbsp;<sub>1st Place · Actian VectorAI DB Build Challenge</sub><br/>
-      AI forensic search matching missing-person descriptions to unidentified remains. Multi-vector retrieval (SapBERT, BGE-M3, CLIP) fused with Reciprocal Rank Fusion, pre-filtered to cut retrieval overhead.<br/>
-      <sub>Python · FastAPI · React · Actian VectorAI · RRF</sub> &nbsp;·&nbsp; <sub><a href="https://trace-forensic-search-ssookra-7703s-projects.vercel.app/">Demo</a> · <a href="https://dorahacks.io/buidl/43227">DoraHacks</a></sub>
-    </td>
-    <td valign="top" width="50%">
-      🏆 <a href="https://github.com/vinhbin/wattline"><b>WATTLINE</b></a> &nbsp;<sub>Best Hack for Good · Hack RenderATL / MLH</sub><br/>
-      Outage exposure for electricity-dependent medical equipment users across 25 Atlanta NPUs. Reconciled the federal emPOWER pipeline against a 92,233-person state anchor; precomputed JSON, no database in the request path.<br/>
-      <sub>Python · FastAPI · React · MapLibre · HHS emPOWER</sub> &nbsp;·&nbsp; <sub><a href="https://wattline-web.onrender.com">Demo</a> · <a href="https://devpost.com/software/wattline">Devpost</a></sub>
-    </td>
-  </tr>
+<!-- flagship -->
+<a href="https://github.com/vinhbin/wattline">
+  <img src="./assets/wattline.png" alt="WATTLINE — Atlanta outage exposure map" width="100%" />
+</a>
+<table align="center" width="100%">
   <tr>
     <td valign="top">
-      ⚙️ <a href="https://github.com/StephenSook/bearing-witness"><b>Bearing Witness</b></a> &nbsp;<sub>Dell × NVIDIA AI Hackathon · NYC</sub><br/>
-      Always-on, fully local bearing-screening agent on the Dell Pro Max GB10. Physics does the diagnosis, a local model files the paperwork, and a human has to say yes.<br/>
+      🏆 <a href="https://github.com/vinhbin/wattline"><b>WATTLINE</b></a> &nbsp;<sub>Best Hack for Good · Hack RenderATL / MLH · Aug 2026</sub><br/>
+      When the power goes out, some people are on a clock. WATTLINE maps electricity-dependent medical equipment users to neighborhood-level outage exposure across 25 Atlanta NPUs, then routes charging capacity to the highest-gap areas, constrained by MARTA reachability. I led the 4-person team: scoped the project, verified the federal HHS emPOWER pipeline against a 92,233-person state anchor, and built the React/MapLibre frontend with a 24-hour timeline scrubber. Read path is precomputed JSON behind FastAPI, no database per request.<br/>
+      <sub>Python · FastAPI · React · MapLibre · HHS emPOWER</sub> &nbsp;·&nbsp; <sub><a href="https://wattline-web.onrender.com">Live demo</a> · <a href="https://devpost.com/software/wattline">Devpost</a></sub>
+    </td>
+  </tr>
+</table>
+
+<table align="center" width="100%">
+  <tr>
+    <td valign="top" width="33%">
+      🥇 <a href="https://github.com/StephenSook/trace-forensic-search"><b>Trace</b></a><br/>
+      <sub>1st Place · Actian VectorAI DB Build Challenge</sub><br/>
+      AI forensic search matching missing-person descriptions to unidentified remains. Multi-vector retrieval (SapBERT, BGE-M3, CLIP) fused with Reciprocal Rank Fusion.<br/>
+      <sub>Python · FastAPI · React · Actian VectorAI</sub><br/>
+      <sub><a href="https://trace-forensic-search-ssookra-7703s-projects.vercel.app/">Demo</a> · <a href="https://dorahacks.io/buidl/43227">DoraHacks</a></sub>
+    </td>
+    <td valign="top" width="33%">
+      ⚙️ <a href="https://github.com/StephenSook/bearing-witness"><b>Bearing Witness</b></a><br/>
+      <sub>Dell × NVIDIA AI Hackathon · NYC</sub><br/>
+      Always-on, fully local bearing-screening agent on the Dell Pro Max GB10. Physics does the diagnosis, a local model files the paperwork, a human has to say yes.<br/>
       <sub>Python · Local LLM · Signal processing · GB10</sub>
     </td>
-    <td valign="top">
-      🏎️ <a href="https://github.com/StephenSook/apex"><b>APEX</b></a> &nbsp;<sub>IBM SkillsBuild AI Builders Challenge</sub><br/>
-      AI race engineer coaching adaptive racers, built on IBM Granite. Owned the backend: 20 live endpoints, Granite tool integration, and a 192-test suite wired into CI to gate every merge.<br/>
-      <sub>Python · FastAPI · IBM Granite · pytest · CI</sub> &nbsp;·&nbsp; <sub><a href="https://apex-one-black.vercel.app">Demo</a></sub>
+    <td valign="top" width="33%">
+      🏎️ <a href="https://github.com/StephenSook/apex"><b>APEX</b></a><br/>
+      <sub>IBM SkillsBuild AI Builders Challenge</sub><br/>
+      AI race engineer coaching adaptive racers on IBM Granite. Owned the backend: 20 live endpoints, Granite tool integration, 192-test suite gating every merge.<br/>
+      <sub>Python · FastAPI · IBM Granite · pytest · CI</sub><br/>
+      <sub><a href="https://apex-one-black.vercel.app">Demo</a></sub>
     </td>
   </tr>
   <tr>
-    <td valign="top">
-      🗺️ <a href="https://github.com/StephenSook/Hometown-Pathway-Atlas"><b>Hometown Pathway Atlas</b></a> &nbsp;<sub>Team USA × Google Cloud Hackathon</sub><br/>
-      County-level Olympic and Paralympic parity analytics. Built the data pipeline with per-capita normalization and empirical-Bayes shrinkage; Vertex AI Gemini on Cloud Run.<br/>
-      <sub>Python · Vertex AI Gemini · Cloud Run · Data pipeline</sub> &nbsp;·&nbsp; <sub><a href="https://atlas-frontend-635524063449.us-central1.run.app">Demo</a></sub>
+    <td valign="top" width="33%">
+      🗺️ <a href="https://github.com/StephenSook/Hometown-Pathway-Atlas"><b>Hometown Pathway Atlas</b></a><br/>
+      <sub>Team USA × Google Cloud Hackathon</sub><br/>
+      County-level Olympic and Paralympic parity analytics. Data pipeline with per-capita normalization and empirical-Bayes shrinkage; Vertex AI Gemini on Cloud Run.<br/>
+      <sub>Python · Vertex AI Gemini · Cloud Run</sub><br/>
+      <sub><a href="https://atlas-frontend-635524063449.us-central1.run.app">Demo</a></sub>
     </td>
-    <td valign="top">
-      🛡️ <a href="https://github.com/StephenSook/context-mod-devvit"><b>ContextMod</b></a> &nbsp;<sub>Reddit Mod Tools Hackathon</sub><br/>
-      Rule-engine backend for a native Devvit moderation bot: JSON5 rules, multiple rule kinds and action handlers, on a strict-TypeScript, fully tested codebase.<br/>
-      <sub>TypeScript · Devvit · JSON5 · Testing</sub> &nbsp;·&nbsp; <sub><a href="https://developers.reddit.com/apps/cm-devvit">App</a></sub>
+    <td valign="top" width="33%">
+      🛡️ <a href="https://github.com/StephenSook/context-mod-devvit"><b>ContextMod</b></a><br/>
+      <sub>Reddit Mod Tools Hackathon</sub><br/>
+      Rule-engine backend for a native Devvit moderation bot: JSON5 rules, multiple rule kinds and action handlers, strict TypeScript, fully tested.<br/>
+      <sub>TypeScript · Devvit · JSON5</sub><br/>
+      <sub><a href="https://developers.reddit.com/apps/cm-devvit">App</a></sub>
+    </td>
+    <td valign="top" width="33%">
+      🎮 <a href="https://github.com/vinhbin/Marvel-Rivals-Live-Coach"><b>Rivals Coach</b></a><br/>
+      <sub>Side project</sub><br/>
+      Live coaching companion for Marvel Rivals: reads the match roster via Overwolf GEP and suggests one pick / swap / hold from your own comfort pool. Decision support, not a stats tracker.<br/>
+      <sub>TypeScript · Overwolf</sub>
     </td>
   </tr>
 </table>
@@ -113,105 +124,97 @@ contact:     vinhhle24@gmail.com  ·  vinh-le.com
 
 <br/>
 
-<img src="./assets/divider.svg" width="100%" alt="" />
-
-<!-- ───────────────────────────  TECH STACK  ───────────────────────── -->
-<div id="user-content-toc">
-  <ul align="center" style="list-style: none;">
-    <summary><h2 style="display: inline-block;">Tech Stack</h2></summary>
-  </ul>
-</div>
+<!-- ─────────────────────────  03 HOW I WORK  ──────────────────────── -->
+<img src="./assets/headers/how.svg" width="100%" alt="How I Work" />
 
 <table align="center" width="100%">
-<tr>
-<td align="center"><b>Languages</b></td>
-<td align="center"><img src="https://skillicons.dev/icons?i=py,java,ts,js,html,css&theme=dark" alt="Languages" /></td>
-</tr>
-<tr>
-<td align="center"><b>Backend</b></td>
-<td align="center">
-  <img src="https://skillicons.dev/icons?i=fastapi,django,nodejs,express&theme=dark" alt="Backend" />
-  <img src="https://img.shields.io/badge/Django%20REST-092E20?style=flat-square&logo=django&logoColor=white" alt="DRF" />
-  <img src="https://img.shields.io/badge/JWT%20Auth-0D0D0F?style=flat-square&logo=jsonwebtokens&logoColor=FFB347" alt="JWT" />
-</td>
-</tr>
-<tr>
-<td align="center"><b>Data</b></td>
-<td align="center">
-  <img src="https://skillicons.dev/icons?i=postgres,mysql,mongodb,supabase&theme=dark" alt="Databases" />
-  <img src="https://img.shields.io/badge/pgvector-0D0D0F?style=flat-square&logo=postgresql&logoColor=FF6B35" alt="pgvector" />
-</td>
-</tr>
-<tr>
-<td align="center"><b>AI / ML</b></td>
-<td align="center">
-  <img src="https://skillicons.dev/icons?i=sklearn&theme=dark" alt="scikit-learn" />
-  <img src="https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white" alt="OpenAI" />
-  <img src="https://img.shields.io/badge/Claude-CC785C?style=flat-square&logo=anthropic&logoColor=white" alt="Claude" />
-  <img src="https://img.shields.io/badge/Gemini-1A1B27?style=flat-square&logo=googlegemini&logoColor=8AB4F8" alt="Gemini" />
-  <img src="https://img.shields.io/badge/RAG%20%2F%20Embeddings-0D0D0F?style=flat-square&logoColor=FFB347" alt="RAG" />
-</td>
-</tr>
-<tr>
-<td align="center"><b>Cloud / Tools</b></td>
-<td align="center"><img src="https://skillicons.dev/icons?i=docker,aws,azure,vercel,git,github,postman&theme=dark" alt="Cloud and tools" /></td>
-</tr>
-<tr>
-<td align="center"><b>Frontend</b></td>
-<td align="center"><img src="https://skillicons.dev/icons?i=react,nextjs,bootstrap&theme=dark" alt="Frontend" /></td>
-</tr>
+  <tr>
+    <td valign="top" width="33%">
+      <b>Tests gate the merge</b><br/>
+      <sub>APEX shipped with a 192-test backend suite wired into CI before the demo, not after. If it isn't tested, it isn't done.</sub>
+    </td>
+    <td valign="top" width="33%">
+      <b>Precompute the read path</b><br/>
+      <sub>WATTLINE serves frozen JSON; nothing calculates per request. Boring at runtime is a feature.</sub>
+    </td>
+    <td valign="top" width="33%">
+      <b>A human says yes</b><br/>
+      <sub>Bearing Witness drafts the inspection; it never files it. AI proposes, a person decides, especially when the stakes are real.</sub>
+    </td>
+  </tr>
 </table>
 
 <br/>
 
-<img src="./assets/divider.svg" width="100%" alt="" />
+<!-- ─────────────────────────  04 STACK  ───────────────────────────── -->
+<img src="./assets/headers/stack.svg" width="100%" alt="Stack" />
 
-<!-- ──────────────────────────  GITHUB STATS  ─────────────────────── -->
-<div id="user-content-toc">
-  <ul align="center" style="list-style: none;">
-    <summary><h2 style="display: inline-block;">GitHub Stats</h2></summary>
-  </ul>
-</div>
+<table align="center" width="100%">
+<tr><td align="right" width="120"><sub><b>LANGUAGES</b></sub></td><td>
+<img src="https://img.shields.io/badge/Python-1A1A1F?style=for-the-badge&logo=python&logoColor=FFB347" alt="Python" />
+<img src="https://img.shields.io/badge/Java-1A1A1F?style=for-the-badge&logo=openjdk&logoColor=FFB347" alt="Java" />
+<img src="https://img.shields.io/badge/TypeScript-1A1A1F?style=for-the-badge&logo=typescript&logoColor=FFB347" alt="TypeScript" />
+<img src="https://img.shields.io/badge/JavaScript-1A1A1F?style=for-the-badge&logo=javascript&logoColor=FFB347" alt="JavaScript" />
+<img src="https://img.shields.io/badge/SQL-1A1A1F?style=for-the-badge&logo=postgresql&logoColor=FFB347" alt="SQL" />
+</td></tr>
+<tr><td align="right"><sub><b>AI / ML</b></sub></td><td>
+<img src="https://img.shields.io/badge/OpenAI-1A1A1F?style=for-the-badge" alt="OpenAI" />
+<img src="https://img.shields.io/badge/Claude-1A1A1F?style=for-the-badge&logo=anthropic&logoColor=FFB347" alt="Claude" />
+<img src="https://img.shields.io/badge/Gemini-1A1A1F?style=for-the-badge&logo=googlegemini&logoColor=FFB347" alt="Gemini" />
+<img src="https://img.shields.io/badge/RAG%20%2F%20Embeddings-1A1A1F?style=for-the-badge&logo=databricks&logoColor=FFB347" alt="RAG / Embeddings" />
+<img src="https://img.shields.io/badge/pgvector-1A1A1F?style=for-the-badge&logo=postgresql&logoColor=FFB347" alt="pgvector" />
+<img src="https://img.shields.io/badge/scikit--learn-1A1A1F?style=for-the-badge&logo=scikitlearn&logoColor=FFB347" alt="scikit-learn" />
+</td></tr>
+<tr><td align="right"><sub><b>BACKEND</b></sub></td><td>
+<img src="https://img.shields.io/badge/FastAPI-1A1A1F?style=for-the-badge&logo=fastapi&logoColor=FFB347" alt="FastAPI" />
+<img src="https://img.shields.io/badge/Django-1A1A1F?style=for-the-badge&logo=django&logoColor=FFB347" alt="Django" />
+<img src="https://img.shields.io/badge/Node.js-1A1A1F?style=for-the-badge&logo=nodedotjs&logoColor=FFB347" alt="Node.js" />
+<img src="https://img.shields.io/badge/Express-1A1A1F?style=for-the-badge&logo=express&logoColor=FFB347" alt="Express" />
+<img src="https://img.shields.io/badge/REST%20%2B%20JWT-1A1A1F?style=for-the-badge&logo=jsonwebtokens&logoColor=FFB347" alt="REST + JWT" />
+</td></tr>
+<tr><td align="right"><sub><b>FRONTEND</b></sub></td><td>
+<img src="https://img.shields.io/badge/React-1A1A1F?style=for-the-badge&logo=react&logoColor=FFB347" alt="React" />
+<img src="https://img.shields.io/badge/Next.js-1A1A1F?style=for-the-badge&logo=nextdotjs&logoColor=FFB347" alt="Next.js" />
+<img src="https://img.shields.io/badge/MapLibre-1A1A1F?style=for-the-badge&logo=maplibre&logoColor=FFB347" alt="MapLibre" />
+<img src="https://img.shields.io/badge/Bootstrap-1A1A1F?style=for-the-badge&logo=bootstrap&logoColor=FFB347" alt="Bootstrap" />
+</td></tr>
+<tr><td align="right"><sub><b>DATA</b></sub></td><td>
+<img src="https://img.shields.io/badge/PostgreSQL-1A1A1F?style=for-the-badge&logo=postgresql&logoColor=FFB347" alt="PostgreSQL" />
+<img src="https://img.shields.io/badge/MySQL-1A1A1F?style=for-the-badge&logo=mysql&logoColor=FFB347" alt="MySQL" />
+<img src="https://img.shields.io/badge/MongoDB-1A1A1F?style=for-the-badge&logo=mongodb&logoColor=FFB347" alt="MongoDB" />
+<img src="https://img.shields.io/badge/Supabase-1A1A1F?style=for-the-badge&logo=supabase&logoColor=FFB347" alt="Supabase" />
+</td></tr>
+<tr><td align="right"><sub><b>CLOUD / TOOLS</b></sub></td><td>
+<img src="https://img.shields.io/badge/Docker-1A1A1F?style=for-the-badge&logo=docker&logoColor=FFB347" alt="Docker" />
+<img src="https://img.shields.io/badge/AWS-1A1A1F?style=for-the-badge" alt="AWS" />
+<img src="https://img.shields.io/badge/Azure-1A1A1F?style=for-the-badge" alt="Azure" />
+<img src="https://img.shields.io/badge/Vercel-1A1A1F?style=for-the-badge&logo=vercel&logoColor=FFB347" alt="Vercel" />
+<img src="https://img.shields.io/badge/Google%20Cloud-1A1A1F?style=for-the-badge&logo=googlecloud&logoColor=FFB347" alt="Google Cloud" />
+<img src="https://img.shields.io/badge/Git-1A1A1F?style=for-the-badge&logo=git&logoColor=FFB347" alt="Git" />
+<img src="https://img.shields.io/badge/Postman-1A1A1F?style=for-the-badge&logo=postman&logoColor=FFB347" alt="Postman" />
+</td></tr>
+</table>
+
+<br/>
+
+<!-- ─────────────────────────  05 ACTIVITY  ────────────────────────── -->
+<img src="./assets/headers/activity.svg" width="100%" alt="Activity" />
 
 <div align="center">
-  <img height="180" src="https://streak-stats.demolab.com/?user=vinhbin&hide_border=true&background=0D0D0F&stroke=FF6B35&ring=FFB347&fire=E63946&currStreakNum=F5F5F5&sideNums=F5F5F5&currStreakLabel=FFB347&sideLabels=F5F5F5&dates=8A8A8F" alt="Contribution streak and totals" />
+  <img src="https://raw.githubusercontent.com/vinhbin/vinhbin/output/stats.svg" alt="GitHub stats: contributions, commits, pull requests, streak, top languages" />
 </div>
 
 <br/>
 
 <div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=vinhbin&hide_border=true&bg_color=0D0D0F&color=F5F5F5&line=FF6B35&point=FFB347&area=true&area_color=E63946&title_color=FFB347" alt="Activity graph" />
+  <img src="https://raw.githubusercontent.com/vinhbin/vinhbin/output/pokegrid.svg" alt="Contribution calendar as a grid of Pokéballs" width="100%" />
+  <br/><sub>Every contribution is a catch. Regenerated daily.</sub>
 </div>
 
 <br/>
 
-<img src="./assets/divider.svg" width="100%" alt="" />
-
-<!-- ────────────────────────  SNAKE ANIMATION  ─────────────────────── -->
-<div id="user-content-toc">
-  <ul align="center" style="list-style: none;">
-    <summary><h2 style="display: inline-block;">Contribution Snake</h2></summary>
-  </ul>
-</div>
-
-<div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vinhbin/vinhbin/output/github-snake-dark.svg" />
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/vinhbin/vinhbin/output/github-snake.svg" />
-    <img alt="Contribution snake" src="https://raw.githubusercontent.com/vinhbin/vinhbin/output/github-snake.svg" />
-  </picture>
-</div>
-
-<br/>
-
-<img src="./assets/divider.svg" width="100%" alt="" />
-
-<!-- ─────────────────────────  CONNECT  ────────────────────────────── -->
-<div id="user-content-toc">
-  <ul align="center" style="list-style: none;">
-    <summary><h2 style="display: inline-block;">Let's Connect</h2></summary>
-  </ul>
-</div>
+<!-- ─────────────────────────  06 CONNECT  ─────────────────────────── -->
+<img src="./assets/headers/connect.svg" width="100%" alt="Connect" />
 
 <div align="center">
   <a href="https://www.linkedin.com/in/vinh-thaile/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
@@ -222,7 +225,6 @@ contact:     vinhhle24@gmail.com  ·  vinh-le.com
 
 <br/>
 
-<!-- ─────────────────────────  FOOTER WAVE  ─────────────────────────── -->
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:E63946,50:FF6B35,100:FFB347&height=140&section=footer&animation=fadeIn" alt="Footer wave" width="100%" />
 
 <div align="center">
