@@ -12,7 +12,7 @@
 <!-- ─────────────────────  ANIMATED TYPING TAGLINE  ───────────────── -->
 <div align="center">
   <a href="https://vinh-le.com">
-    <img src="https://readme-typing-svg.demolab.com?font=Georgia&weight=400&size=28&duration=3000&pause=800&color=FFB347&center=true&vCenter=true&width=820&height=60&lines=Full-stack+%26+AI+Engineer;M.S.+Computer+Science+%40+Georgia+Tech;1st+Place+%C2%B7+Actian+VectorAI+DB+Build+Challenge;Best+Hack+for+Good+%C2%B7+Hack+RenderATL+%2F+MLH;Ex-SWE+Intern+%26+Co-Lead+%40+SkyIT;Atlanta%2C+GA+%C2%B7+Building+end-to-end" alt="Rotating tagline" />
+    <img src="https://readme-typing-svg.demolab.com?font=Georgia&weight=400&size=28&duration=3000&pause=800&color=FFB347&center=true&vCenter=true&width=820&height=60&lines=Full-stack+%26+AI+Engineer;Always+building+%C2%B7+Solving+impactful+problems+with+AI;M.S.+Computer+Science+%40+Georgia+Tech;1st+Place+%C2%B7+Actian+VectorAI+DB+Build+Challenge;Best+Hack+for+Good+%C2%B7+Hack+RenderATL+%2F+MLH;Ex-SWE+Intern+%26+Co-Lead+%40+SkyIT;Atlanta%2C+GA+%C2%B7+Building+end-to-end" alt="Rotating tagline" />
   </a>
 </div>
 
@@ -37,6 +37,7 @@
 ```yaml
 name:        Vinh Le
 role:        Full-stack & AI Engineer
+mission:     Always building · using AI to solve problems that actually matter
 education:   Georgia Tech · M.S. Computer Science (OMSCS) · '28
              Georgia State · B.S. Computer Science · 3.5 GPA · Dean's List · Dec '25
 experience:  SWE Intern → Co-Lead @ SkyIT (GBCS Group) · Technical Fellow @ CodePath
@@ -51,6 +52,7 @@ contact:     vinhhle24@gmail.com  ·  vinh-le.com
 - **Also** &nbsp;**1st place** at the **Actian VectorAI DB Build Challenge** with **Trace**, a multi-vector forensic search platform · shipped **Bearing Witness** at the **Dell × NVIDIA AI Hackathon** in NYC
 - **Previously** &nbsp;co-led modernization of a multi-tenant Django/React fleet platform at **SkyIT**, fixing defects across 14+ endpoints and porting the GHG emissions module to tenant-scoped models
 - **Summer 2026** &nbsp;**CodePath Technical Fellow** for a 200+ learner AI engineering course · Certificate of Leadership
+- **What drives me** &nbsp;I'm happiest building. Every project above started with a real problem — a family searching for someone, a neighborhood that goes dark, a racer who needs a coach in their ear — and asked what AI could actually do about it.
 - **Ask me about** &nbsp;AI engineering · RAG & vector search · FastAPI / Django / React · hackathons · the Atlanta tech scene
 
 <br/>
