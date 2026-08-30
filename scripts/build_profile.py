@@ -215,16 +215,17 @@ def creature(r, level):
     )
 
 
-def pokeball(cx, cy, r, level, delay, dur):
+def pokeball(cx, cy, r, level, i=0):
     """Grid cell. Level 0 = dim empty slot. Contribution cells show a creature that gets
-    hit by the thrown ball, vanishes, and is replaced by a wobbling Pokéball (caught)."""
+    hit by the thrown ball, vanishes, and is replaced by a wobbling Pokéball (caught).
+    Timing lives in per-cell keyframes (m{i}/b{i}) on the global clock — no animation-delay,
+    so every cell resets exactly when the loop restarts."""
     if level == 0:
         return f'<circle cx="{cx}" cy="{cy}" r="{r-0.5}" fill="none" stroke="{SURFACE}" stroke-width="1"/>'
     top = [RED, ORANGE, AMBER, TEXT][level - 1]
-    d = f'style="animation-delay:{delay:.2f}s"'
     return (
-        f'<g class="mon" {d} transform="translate({cx} {cy})">{creature(r, level)}</g>'
-        f'<g class="cb" {d} transform="translate({cx} {cy})">{ball_shape(r, top)}</g>'
+        f'<g class="mon m{i}" transform="translate({cx} {cy})">{creature(r, level)}</g>'
+        f'<g class="cb b{i}" transform="translate({cx} {cy})">{ball_shape(r, top)}</g>'
     )
 
 
@@ -302,14 +303,14 @@ def build_pokegrid(weeks):
             cx = left + ci * step + r
             cy = top + wd * step + r
             if lv == 0:
-                parts.append(pokeball(cx, cy, r, 0, 0, 0))
+                parts.append(pokeball(cx, cy, r, 0))
             else:
                 targets.append((cx, cy, lv))
     n = max(1, len(targets))
-    DUR = n * THROW + 1.0
+    DUR = n * THROW + 1.6
     land_frac = 0.78
     for i, (cx, cy, lv) in enumerate(targets):
-        parts.append(pokeball(cx, cy, r, lv, i * THROW + land_frac * THROW, DUR))
+        parts.append(pokeball(cx, cy, r, lv, i))
 
     # Throw keyframes: start big at the launch pad (outside the box, bottom-right), arc up and
     # shrink toward the target (fake depth), vanish on impact, reappear at the pad for the next throw.
@@ -327,29 +328,28 @@ def build_pokegrid(weeks):
         key(t0 + THROW - 0.02, sx, sy, 2.3, 0)
     key(DUR, sx, sy, 2.3, 1)
     c = lambda sec: f"{100*sec/DUR:.3f}%"
-    mon = (
-        f"0%{{transform:scale(1);opacity:1}}"
-        f"{c(0.05)}{{transform:scale(1.5);opacity:1}}"
-        f"{c(0.16)}{{transform:scale(.15);opacity:0}}"
-        f"{c(DUR-0.5)}{{transform:scale(.15);opacity:0}}"
-        f"100%{{transform:scale(1);opacity:1}}"
-    )
-    cb = (
-        f"0%{{transform:scale(.3) rotate(0deg);opacity:0}}"
-        f"{c(0.14)}{{transform:scale(.3) rotate(0deg);opacity:0}}"
-        f"{c(0.20)}{{transform:scale(1.4) rotate(0deg);opacity:1}}"
-        f"{c(0.30)}{{transform:scale(1.1) rotate(-24deg)}}"
-        f"{c(0.40)}{{transform:scale(1.1) rotate(24deg)}}"
-        f"{c(0.50)}{{transform:scale(1.05) rotate(-14deg)}}"
-        f"{c(0.60)}{{transform:scale(1) rotate(0deg);opacity:1}}"
-        f"{c(DUR-0.5)}{{transform:scale(1) rotate(0deg);opacity:1}}"
-        f"100%{{transform:scale(.3) rotate(0deg);opacity:0}}"
-    )
+    # Per-cell keyframes on the global clock. Hit time h_i = i*THROW + land_frac*THROW.
+    P = lambda sec: f"{100*max(0.0, min(DUR, sec))/DUR:.3f}%"
+    reset = DUR - 0.5
+    cell_css = []
+    for i in range(len(targets)):
+        h = i * THROW + land_frac * THROW
+        cell_css.append(
+            f"@keyframes m{i}{{0%{{transform:scale(1);opacity:1}}{P(h)}{{transform:scale(1);opacity:1}}"
+            f"{P(h+0.05)}{{transform:scale(1.5);opacity:1}}{P(h+0.16)}{{transform:scale(.15);opacity:0}}"
+            f"{P(reset)}{{transform:scale(.15);opacity:0}}100%{{transform:scale(1);opacity:1}}}}"
+            f".m{i}{{animation:m{i} {DUR:.2f}s linear infinite}}"
+            f"@keyframes b{i}{{0%{{transform:scale(.3) rotate(0deg);opacity:0}}{P(h+0.14)}{{transform:scale(.3) rotate(0deg);opacity:0}}"
+            f"{P(h+0.20)}{{transform:scale(1.4) rotate(0deg);opacity:1}}{P(h+0.30)}{{transform:scale(1.1) rotate(-24deg)}}"
+            f"{P(h+0.40)}{{transform:scale(1.1) rotate(24deg)}}{P(h+0.50)}{{transform:scale(1.05) rotate(-14deg)}}"
+            f"{P(h+0.60)}{{transform:scale(1) rotate(0deg);opacity:1}}{P(reset)}{{transform:scale(1) rotate(0deg);opacity:1}}"
+            f"100%{{transform:scale(.3) rotate(0deg);opacity:0}}}}"
+            f".b{i}{{animation:b{i} {DUR:.2f}s linear infinite}}"
+        )
     parts.append(
         "<style>"
-        f"@keyframes mon{{{mon}}}@keyframes cb{{{cb}}}"
-        f".mon{{animation:mon {DUR:.2f}s linear infinite;transform-box:fill-box;transform-origin:center}}"
-        f".cb{{animation:cb {DUR:.2f}s linear infinite;transform-box:fill-box;transform-origin:center;opacity:0}}"
+        ".mon,.cb{transform-box:fill-box;transform-origin:center}.cb{opacity:0}"
+        + "".join(cell_css) +
         "@keyframes spin{to{transform:rotate(360deg)}}"
         ".spin{animation:spin .6s linear infinite;transform-box:fill-box;transform-origin:center}"
         f"@keyframes throw{{{''.join(kf)}}}"
