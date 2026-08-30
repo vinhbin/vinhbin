@@ -174,7 +174,7 @@ def build_stats(user, streak, langs):
     parts.append(f'<path d="M262 56 V178" stroke="{BG}" stroke-width="1.5"/>')
     # Right column: languages
     rx, bar_y, bar_w, bar_h = 284, 70, 187, 8
-    parts.append(f'<text x="{rx}" y="{row_y[0]-18}" font-family="{SERIF}" font-size="14" fill="{TEXT}">Top languages · 10 recent projects</text>')
+    parts.append(f'<text x="{rx}" y="{row_y[0]-18}" font-family="{SERIF}" font-size="14" fill="{TEXT}">Languages · 10 projects</text>')
     parts.append(f'<clipPath id="bar"><rect x="{rx}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="4"/></clipPath>')
     parts.append(f'<rect x="{rx}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="4" fill="{BG}"/>')
     cursor = rx
