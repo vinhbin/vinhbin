@@ -251,9 +251,12 @@ def pokeball(cx, cy, r, level, i=0):
     if level == 0:
         return f'<circle cx="{cx}" cy="{cy}" r="{r-0.5}" fill="none" stroke="{SURFACE}" stroke-width="1"/>'
     top = [RED, ORANGE, AMBER, TEXT][level - 1]
+    # NOTE: the positional translate must live on an OUTER group. A CSS `transform`
+    # animation replaces the element's own transform attribute, which would collapse
+    # every cell onto the origin.
     return (
-        f'<g class="mon m{i}" transform="translate({cx} {cy})">{creature(r, level)}</g>'
-        f'<g class="cb b{i}" transform="translate({cx} {cy})">{ball_shape(r, top)}</g>'
+        f'<g transform="translate({cx} {cy})"><g class="mon m{i}">{creature(r, level)}</g></g>'
+        f'<g transform="translate({cx} {cy})"><g class="cb b{i}">{ball_shape(r, top)}</g></g>'
     )
 
 
