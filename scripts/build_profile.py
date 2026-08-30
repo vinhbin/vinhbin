@@ -39,9 +39,10 @@ query($login: String!, $from: DateTime!, $to: DateTime!) {
         weeks { contributionDays { date contributionCount } }
       }
     }
-    repositories(first: 10, ownerAffiliations: OWNER, isFork: false, orderBy: {field: PUSHED_AT, direction: DESC}) {
+    repositories(first: 100, ownerAffiliations: OWNER, isFork: false, privacy: PUBLIC) {
       nodes {
         name
+        pushedAt
         languages(first: 5, orderBy: {field: SIZE, direction: DESC}) {
           edges { size node { name color } }
         }
@@ -92,17 +93,44 @@ def compute_streak(days):
     return streak
 
 
+TOP_REPOS = 10  # languages are computed from this many most-recently-pushed public repos
+
+# Coursework / scaffolding repos: excluded so the bar reflects real projects.
+EXCLUDE = ("ai110-", "cw", "inclass", "hw0", "matching_card", "flutter", "digital_pet",
+           "statemanagement", "mobile-inclass", "free-tailwind")
+EXCLUDE_SUFFIX = ("-starter", "-starter2", "-template")
+
+
+def is_project(name):
+    n = name.lower()
+    if n.startswith(EXCLUDE) or n.endswith(EXCLUDE_SUFFIX):
+        return False
+    return True
+
+
 def compute_languages(repos):
+    # Sort locally instead of relying on the API's ordering: the Actions token and a user
+    # token return different orders for the same query.
+    picked = sorted(
+        (r for r in repos if r["name"].lower() != USER.lower() and is_project(r["name"])),
+        key=lambda r: r.get("pushedAt") or "",
+        reverse=True,
+    )[:TOP_REPOS]
+    print("language repos:", ", ".join(r["name"] for r in picked))
+    # Equal weight per project: average each repo's own language mix, so one huge repo
+    # (e.g. notebooks, which embed their image output) can't dominate the bar.
     totals = {}
-    for repo in repos:
-        if repo["name"].lower() == USER.lower():  # skip the profile README repo itself
+    for repo in picked:
+        edges = repo["languages"]["edges"]
+        size = sum(e["size"] for e in edges)
+        if not size:
             continue
-        for edge in repo["languages"]["edges"]:
-            name = edge["node"]["name"]
-            totals[name] = totals.get(name, 0) + edge["size"]
-    grand = sum(totals.values()) or 1
-    ranked = sorted(totals.items(), key=lambda kv: -kv[1])[:5]
-    return [(name, size / grand * 100) for name, size in ranked]
+        for e in edges:
+            name = e["node"]["name"]
+            totals[name] = totals.get(name, 0) + e["size"] / size
+    total = sum(totals.values()) or 1
+    ranked = sorted(totals.items(), key=lambda kv: kv[1], reverse=True)[:5]
+    return [(n, 100 * v / total) for n, v in ranked]
 
 
 def fmt(n):
@@ -146,7 +174,7 @@ def build_stats(user, streak, langs):
     parts.append(f'<path d="M262 56 V178" stroke="{BG}" stroke-width="1.5"/>')
     # Right column: languages
     rx, bar_y, bar_w, bar_h = 284, 70, 187, 8
-    parts.append(f'<text x="{rx}" y="{row_y[0]-18}" font-family="{SERIF}" font-size="14" fill="{TEXT}">Top languages</text>')
+    parts.append(f'<text x="{rx}" y="{row_y[0]-18}" font-family="{SERIF}" font-size="14" fill="{TEXT}">Top languages · 10 recent projects</text>')
     parts.append(f'<clipPath id="bar"><rect x="{rx}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="4"/></clipPath>')
     parts.append(f'<rect x="{rx}" y="{bar_y}" width="{bar_w}" height="{bar_h}" rx="4" fill="{BG}"/>')
     cursor = rx
