@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="495" height="200" viewBox="0 0 495 200" role="img" aria-label="GitHub stats for vinhbin">
+<rect width="495" height="200" rx="10" fill="#0D0D0F"/>
+<rect x="1" y="1" width="493" height="198" rx="9" fill="#1A1A1F"/>
+<path d="M14 1.5 H481" stroke="#FF6B35" stroke-width="2"/>
+<text x="24" y="34" font-family="Georgia, 'Times New Roman', serif" font-size="17" fill="#F5F5F5">vinhbin <tspan fill="#8A8A8F">&#183; last 365 days</tspan></text>
+<text x="24" y="78" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="26" font-weight="bold" fill="#FF6B35">429</text>
+<text x="24" y="96" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#8A8A8F">CONTRIBUTIONS</text>
+<text x="140" y="78" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="26" font-weight="bold" fill="#FF6B35">402</text>
+<text x="140" y="96" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#8A8A8F">COMMITS</text>
+<text x="24" y="146" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="26" font-weight="bold" fill="#FF6B35">3</text>
+<text x="24" y="164" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#8A8A8F">PULL REQUESTS</text>
+<text x="140" y="146" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="26" font-weight="bold" fill="#FF6B35">0d</text>
+<text x="140" y="164" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="10.5" fill="#8A8A8F">CURRENT STREAK</text>
+<path d="M262 56 V178" stroke="#0D0D0F" stroke-width="1.5"/>
+<text x="284" y="60" font-family="Georgia, 'Times New Roman', serif" font-size="14" fill="#F5F5F5">Languages · 10 projects</text>
+<clipPath id="bar"><rect x="284" y="70" width="187" height="8" rx="4"/></clipPath>
+<rect x="284" y="70" width="187" height="8" rx="4" fill="#0D0D0F"/>
+<rect clip-path="url(#bar)" x="284.00" y="70" width="59.88" height="8" fill="#E63946"/>
+<rect clip-path="url(#bar)" x="343.88" y="70" width="37.05" height="8" fill="#FF6B35"/>
+<rect clip-path="url(#bar)" x="380.93" y="70" width="26.52" height="8" fill="#FFB347"/>
+<rect clip-path="url(#bar)" x="407.45" y="70" width="22.05" height="8" fill="#F5F5F5"/>
+<rect clip-path="url(#bar)" x="429.50" y="70" width="18.52" height="8" fill="#8A8A8F"/>
+<circle cx="288" cy="94" r="4" fill="#E63946"/>
+<text x="298" y="98" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#F5F5F5">JavaScript</text>
+<text x="471" y="98" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#8A8A8F">32.0%</text>
+<circle cx="288" cy="111" r="4" fill="#FF6B35"/>
+<text x="298" y="115" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#F5F5F5">TypeScript</text>
+<text x="471" y="115" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#8A8A8F">19.8%</text>
+<circle cx="288" cy="128" r="4" fill="#FFB347"/>
+<text x="298" y="132" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#F5F5F5">Python</text>
+<text x="471" y="132" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#8A8A8F">14.2%</text>
+<circle cx="288" cy="145" r="4" fill="#F5F5F5"/>
+<text x="298" y="149" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#F5F5F5">CSS</text>
+<text x="471" y="149" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#8A8A8F">11.8%</text>
+<circle cx="288" cy="162" r="4" fill="#8A8A8F"/>
+<text x="298" y="166" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#F5F5F5">Jupyter Notebook</text>
+<text x="471" y="166" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="11.5" fill="#8A8A8F">9.9%</text>
+</svg>
